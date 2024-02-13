@@ -49,7 +49,6 @@ export default function Galaxy({ projects }: { projects: GalaxyProject[] }) {
     const selectProject = useCallback(
         (project: GalaxyProject) => {
             setSelectedProject(project);
-            console.log("showing modal", popupRef.current);
             popupRef.current?.open();
         },
         [setSelectedProject, popupRef]
@@ -128,8 +127,6 @@ const Popup = forwardRef(function Popup(
 });
 
 function generatePoints(width: number, height: number, n: number, iterations: number = 30): [number, number][] {
-    console.debug("generating points");
-    const start = Date.now();
     // https://math.stackexchange.com/questions/366474/find-coordinates-of-n-points-uniformly-distributed-in-a-rectangle
 
     // Step 1: Generate 100n random "density points"
@@ -164,7 +161,6 @@ function generatePoints(width: number, height: number, n: number, iterations: nu
             site[1] = avg[1];
         }
     }
-    console.debug("generated points", Date.now() - start);
 
     return sites.toSorted(([x1, y1], [x2, y2]) => (x1 + y1 * width) - (x2 + y2 * width));
 }
