@@ -162,7 +162,7 @@ function generatePoints(width: number, height: number, n: number, iterations: nu
         }
     }
 
-    return sites.toSorted(([x1, y1], [x2, y2]) => (x1 + y1 * width) - (x2 + y2 * width));
+    return sites?.toSorted(([x1, y1], [x2, y2]) => (x1 + y1 * width) - (x2 + y2 * width));
 }
 
 function findClosestSite(sites: [number, number][], [x, y]: [number, number]): [number, number] | undefined {
