@@ -4,10 +4,19 @@ on:
     push
 
 jobs:
-    build:
+    setup:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
             - uses: oven-sh/setup-bun@v1
             - run: bun install
-            - run: bun build
+    lint:
+        runs-on: ubuntu-latest
+        needs: setup
+        steps:
+            - run: bun run lint
+    build:
+        runs-on: ubuntu-latest
+        needs: setup
+        steps:
+            - run: bun run build
