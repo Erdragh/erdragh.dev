@@ -1,0 +1,85 @@
+.yellow {
+    --galaxy-color: #ffd82c;
+    --galaxy-color-light: #ffffca;
+    --galaxy-color-dark: #856c00;
+}
+.blue {
+    --galaxy-color: #bff5ff;
+    --galaxy-color-light: #eefcff;
+    --galaxy-color-dark: #33818f;
+}
+.red {
+    --galaxy-color: #ff5448;
+    --galaxy-color-light: #ff9f98;
+    --galaxy-color-dark: #6d211c;
+}
+
+.galaxy {
+    --galaxy-color: #ffffff;
+    background: black;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.star {
+    appearance: none;
+    background-color: var(--galaxy-color);
+    box-shadow: 0 0 20px 5px var(--galaxy-color), inset 0 0 5px 0 var(--galaxy-color-light), 0 0 5px 0 var(--galaxy-color-light);
+    border: 1px solid var(--galaxy-color-light);
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    $transition-duration: 0.2s;
+    transition-duration: $transition-duration;
+
+    position: absolute;
+    top: calc(var(--star-y) * 1px);
+    left: calc(var(--star-x) * 1px);
+    transform: translate(-50%, -50%);
+
+    .label {
+        position: absolute;
+        display: flex;
+        top: 50%;
+        right: 0;
+        opacity: 0;
+        min-width: max-content;
+        overflow: hidden;
+        white-space: no-wrap;
+        transition-duration: $transition-duration;
+        color: var(--galaxy-color-light);
+        transform: translateY(-50%);
+        pointer-events: none;
+        text-transform: uppercase;
+        z-index: 1;
+    }
+
+    &:hover, &:focus-visible, &.active {
+        outline: none;
+        box-shadow: 0 0 25px 8px var(--galaxy-color), inset 0 0 7px 0 var(--galaxy-color-light), 0 0 8px 5px var(--galaxy-color-light);
+
+        .label {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(-50%) translateX(calc(100% + 10px));
+            &::before {
+                transform: skew(-20deg);
+            }
+        }
+    }
+
+    &::before {
+        position: absolute;
+        display: block;
+        content: "";
+        width: 300%;
+        height: 300%;
+        top: -100%;
+        left: -100%;
+    }
+}
