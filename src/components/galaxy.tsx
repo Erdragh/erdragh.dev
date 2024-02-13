@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { ForwardedRef, forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import styles from "./galaxy.module.scss";
 
 const random = splitmix32(1);
@@ -8,7 +8,7 @@ const random = splitmix32(1);
 const galaxyColors = {
     yellow: styles.yellow,
     blue: styles.blue,
-    red: styles.red
+    red: styles.red,
 };
 
 export type GalaxyProject = {
@@ -19,38 +19,53 @@ export type GalaxyProject = {
     id: string;
 };
 
-export default function Galaxy({ projects }: { projects: GalaxyProject[]}) {
+export default function Galaxy({ projects }: { projects: GalaxyProject[] }) {
     const [[width, height], setDimensions] = useState<[number, number]>([1000, 1000]);
     const galaxyRef = useRef<HTMLDivElement | null>(null);
+    const popupRef = useRef<{
+        open: () => void;
+        close: () => void;
+    }>(null);
+    const [selectedProject, setSelectedProject] = useState<GalaxyProject | undefined>(undefined);
 
     useEffect(() => {
         let eventTimeout: NodeJS.Timeout | undefined = undefined;
         const eventListener = () => {
             clearTimeout(eventTimeout);
             eventTimeout = setTimeout(() => {
-                if (!galaxyRef.current) return
+                if (!galaxyRef.current) return;
                 setDimensions([galaxyRef.current.clientWidth, galaxyRef.current.clientHeight]);
-            }, 500)
-        }
+            }, 500);
+        };
         window.addEventListener("resize", eventListener);
         eventListener();
         return () => {
             window.removeEventListener("resize", eventListener);
-        }
+        };
     }, [galaxyRef, setDimensions]);
 
     const points = useMemo(() => generatePoints(width, height, projects.length), [width, height, projects.length]);
 
+    const selectProject = useCallback(
+        (project: GalaxyProject) => {
+            setSelectedProject(project);
+            console.log("showing modal", popupRef.current);
+            popupRef.current?.open();
+        },
+        [setSelectedProject, popupRef]
+    );
+
     return (
         <div ref={galaxyRef} className={styles.galaxy}>
             {projects.map((project, i) => (
-                <Star key={project.id} project={project} position={points[i]} />
+                <Star key={project.id} project={project} position={points[i]} select={() => selectProject(project)} />
             ))}
+            <Popup project={selectedProject} ref={popupRef} />
         </div>
     );
 }
 
-function Star({ project, position: [x, y] }: { project: GalaxyProject; position: [number, number] }) {
+function Star({ project, position: [x, y], select }: { project: GalaxyProject; position: [number, number]; select: () => void }) {
     return (
         <button
             className={`${styles.star} ${galaxyColors[project.color]}`}
@@ -61,15 +76,60 @@ function Star({ project, position: [x, y] }: { project: GalaxyProject; position:
                     "--star-y": y,
                 } as any
             }
+            onClick={select}
         >
             <span className={styles.label}>{project.name}</span>
         </button>
     );
 }
 
+const Popup = forwardRef(function Popup(
+    { project }: { project: GalaxyProject | undefined },
+    forwardedRef: ForwardedRef<{
+        open: () => void;
+        close: () => void;
+    }>
+) {
+    const ref = useRef<HTMLDialogElement | null>(null);
+    // Makes it so the ref can be used both here and in the parent
+    useImperativeHandle(
+        forwardedRef,
+        () => ({
+            open() {
+                ref.current?.showModal();
+            },
+            close() {
+                ref.current?.close("closed");
+            },
+        }),
+        []
+    );
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const listener: typeof el.onclick = (event) => {
+            const rect = el.getBoundingClientRect();
+            const isInDialog =
+                rect.top <= event.clientY && event.clientY <= rect.top + rect.height && rect.left <= event.clientX && event.clientX <= rect.left + rect.width;
+            if (!isInDialog) {
+                el.close("closed");
+            }
+        };
+        el.addEventListener("click", listener);
+        return () => {
+            el.removeEventListener("click", listener);
+        }
+    }, [project]);
+    return (
+        <dialog ref={ref}>
+            {project?.name}
+        </dialog>
+    );
+});
+
 function generatePoints(width: number, height: number, n: number, iterations: number = 30): [number, number][] {
     console.debug("generating points");
-    const start = Date.now()
+    const start = Date.now();
     // https://math.stackexchange.com/questions/366474/find-coordinates-of-n-points-uniformly-distributed-in-a-rectangle
 
     // Step 1: Generate 100n random "density points"
