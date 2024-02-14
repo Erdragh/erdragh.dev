@@ -120,8 +120,17 @@ const Popup = forwardRef(function Popup(
         }
     }, [project]);
     return (
-        <dialog ref={ref}>
-            {project?.name}
+        <dialog className={`${styles.project} ${project && galaxyColors[project?.color]}`} ref={ref}>
+            <div className={styles.titlebar}>
+                <h3>
+                    {project?.name}
+                </h3>
+            </div>
+            <div className={styles.description}>
+                <p>
+                    {project?.description}
+                </p>
+            </div>
         </dialog>
     );
 });

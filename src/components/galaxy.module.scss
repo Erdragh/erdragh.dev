@@ -39,6 +39,7 @@
     cursor: pointer;
     $transition-duration: 0.2s;
     transition-duration: $transition-duration;
+    font-family: silkscreen;
 
     position: absolute;
     top: calc(var(--star-y) * 1px);
@@ -84,5 +85,38 @@
         height: 300%;
         top: -100%;
         left: -100%;
+    }
+}
+
+.project {
+    border: none;
+    background: none;
+    flex-direction: column;
+    padding: 10px;
+    max-width: 500px;
+
+    &[open] {
+        display: flex;
+    }
+
+    .titlebar {
+        display: flex;
+    }
+
+    .description {
+        background-color: var(--galaxy-color);
+    }
+
+    h3, p {
+        display: block;
+        margin: 0;
+        color: var(--galaxy-color-dark);
+        padding: 5px;
+    }
+    h3 {
+        font-family: silkscreen;
+        font-size: 15px;
+        background-color: var(--galaxy-color);
+        border-bottom: 1px solid var(--galaxy-color-dark);
     }
 }
