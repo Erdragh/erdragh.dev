@@ -9,6 +9,8 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - uses: pnpm/action-setup@v3
+              with:
+                version: 8
             - uses: actions/setup-node@v3
               with:
                 node-version: 20
@@ -19,6 +21,7 @@ jobs:
     deploy:
         runs-on: ubuntu-latest
         environment: prod
+        needs: build
         steps:
             - uses: actions/checkout@v4
             - name: Add SSH key
