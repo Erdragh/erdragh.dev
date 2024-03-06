@@ -34,7 +34,6 @@ jobs:
                 chmod 600 /home/runner/.ssh/github_actions
             - name: Stop current deployment
               run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "cd ~/web/erdragh.dev && podman-compose down"
-              continue-on-error: true
             - name: Clean up current deployment
               run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "cd ~/web/erdragh.dev && rm -rf ./*"
             - name: Deploy
@@ -44,3 +43,5 @@ jobs:
                 ls
                 echo $(pwd)
                 scp -r -i /home/runner/.ssh/github_actions $(pwd)/* rocky@erdragh.dev:~/web/erdragh.dev/
+            - name: Start new deployment
+              run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "cd ~/web/erdragh.dev && podman-compose up -d"
