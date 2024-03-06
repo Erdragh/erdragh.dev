@@ -38,4 +38,4 @@ jobs:
             - name: Deploy
               env:
                 GLOBIGNORE: .next:node_modules
-              run: scp -r -i /home/runner/.ssh/github_actions ./ rocky@erdragh.dev:~/web/erdragh.dev/
+              run: scp -r -i /home/runner/.ssh/github_actions . rocky@erdragh.dev:~/web/erdragh.dev/
