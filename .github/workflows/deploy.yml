@@ -19,9 +19,9 @@ jobs:
                 echo "${{secrets.DEPLOY_KEY}}" > /home/runner/.ssh/github_actions
                 chmod 600 /home/runner/.ssh/github_actions
             - name: Stop current deployment
-              run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "cd ~/web/erdragh.dev && podman-compose down && rm -rf ./*"
+              run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "cd ~/web/erdragh.dev && TAG=${{github.run_number}} podman-compose down && rm -rf ./*"
             - name: Clean deployment
-              run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "podman rm next_app && podman image prune -af"
+              run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "podman image prune -af"
               continue-on-error: true
             - name: Deploy
               env:
@@ -31,4 +31,4 @@ jobs:
                 echo $(pwd)
                 scp -r -i /home/runner/.ssh/github_actions $(pwd)/* rocky@erdragh.dev:~/web/erdragh.dev/
             - name: Start new deployment
-              run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "cd ~/web/erdragh.dev && podman-compose up -d"
+              run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "cd ~/web/erdragh.dev && TAG=${{github.run_number}} podman-compose up -d"

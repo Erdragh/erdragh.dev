@@ -2,10 +2,11 @@ version: "3"
 
 services:
   next-app:
-    container_name: next_app
+    container_name: erdragh_dev
     build:
       context: ./
       dockerfile: Containerfile
+    image: dev.erdragh.website:${TAG}
     restart: always
     ports:
       - 3000:3000
