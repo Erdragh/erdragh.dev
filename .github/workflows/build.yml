@@ -6,9 +6,21 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+        environment: prod
         steps:
             - uses: actions/checkout@v4
             - uses: oven-sh/setup-bun@v1
             - run: bun install
             - run: bun run lint
             - run: bun run build
+            - name: Add SSH key
+              env:
+                SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+              run: |
+                mkdir -p /home/runner/.ssh
+                ssh-keyscan erdragh.dev >> /home/runner/.ssh/known_hosts
+                echo "${{secrets.DEPLOY_KEY}}" > /home/runner/.ssh/github_actions
+                chmod 600 /home/runner/.ssh/github_actions
+                ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+                ssh-add /home/runner/.ssh/github_actions
+            - run: ssh erdragh.dev uname -a
