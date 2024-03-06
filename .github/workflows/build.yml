@@ -21,4 +21,4 @@ jobs:
                 ssh-keyscan erdragh.dev >> /home/runner/.ssh/known_hosts
                 echo "${{secrets.DEPLOY_KEY}}" > /home/runner/.ssh/github_actions
                 chmod 600 /home/runner/.ssh/github_actions
-            - run: ssh -i /home/runner/.ssh/github_actions erdragh.dev uname -a
+            - run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev uname -a
