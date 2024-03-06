@@ -13,7 +13,6 @@ jobs:
             - run: bun install
             - run: bun run lint
             - run: bun run build
-            - run: dig erdragh.dev
             - name: Add SSH key
               env:
                 SSH_AUTH_SOCK: /tmp/ssh_agent.sock
@@ -22,6 +21,4 @@ jobs:
                 ssh-keyscan erdragh.dev >> /home/runner/.ssh/known_hosts
                 echo "${{secrets.DEPLOY_KEY}}" > /home/runner/.ssh/github_actions
                 chmod 600 /home/runner/.ssh/github_actions
-                ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-                ssh-add /home/runner/.ssh/github_actions
-            - run: ssh erdragh.dev uname -a
+            - run: ssh -i /home/runner/.ssh/github_actions erdragh.dev uname -a
