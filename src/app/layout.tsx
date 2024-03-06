@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./global.scss"
 
 export const metadata: Metadata = {
-  title: "Erdragh",
+  title: "erdragh.dev",
   description: "I'm a Computer Science student and web developer. I also make Minecraft mods.",
 };
 
