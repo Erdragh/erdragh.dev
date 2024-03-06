@@ -8,10 +8,14 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - uses: oven-sh/setup-bun@v1
-            - run: bun install
-            - run: bun run lint
-            - run: bun run build
+            - uses: pnpm/action-setup@v3
+            - uses: actions/setup-node@v3
+              with:
+                node-version: 20
+                cache: 'pnpm'
+            - run: pnpm install
+            - run: pnpm run lint
+            - run: pnpm run build
     deploy:
         runs-on: ubuntu-latest
         environment: prod
