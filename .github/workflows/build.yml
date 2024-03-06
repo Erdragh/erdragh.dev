@@ -31,6 +31,7 @@ jobs:
                 chmod 600 /home/runner/.ssh/github_actions
             - name: Stop current deployment
               run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "cd ~/web/erdragh.dev && podman-compose down && rm -r ./*"
+              continue-on-error: true
             - name: Deploy
               env:
                 GLOBIGNORE: .next:node_modules
