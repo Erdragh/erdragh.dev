@@ -7,9 +7,7 @@ services:
       context: ./
       dockerfile: Containerfile
     restart: always
+    ports:
+      - 3000:3000
     networks:
       - website_network
-
-networks:
-  website_network:
-    external: true
