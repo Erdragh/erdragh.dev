@@ -21,7 +21,10 @@ jobs:
             - name: Stop current deployment
               run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "cd ~/web/erdragh.dev && podman-compose down"
             - name: Clean up current deployment
-              run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "cd ~/web/erdragh.dev && rm -rf ./* && podman rm next_app && podman image prune -af"
+              run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "cd ~/web/erdragh.dev && rm -rf ./* && podman image prune -af"
+            - name: Remove container
+              run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "podman rm next_app"
+              continue-on-error: true
             - name: Deploy
               env:
                 GLOBIGNORE: .next:node_modules
