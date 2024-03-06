@@ -6,13 +6,17 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-        environment: prod
         steps:
             - uses: actions/checkout@v4
             - uses: oven-sh/setup-bun@v1
             - run: bun install
             - run: bun run lint
             - run: bun run build
+    deploy:
+        runs-on: ubuntu-latest
+        environment: prod
+        steps:
+            - uses: actions/checkout@v4
             - name: Add SSH key
               env:
                 SSH_AUTH_SOCK: /tmp/ssh_agent.sock
@@ -21,4 +25,9 @@ jobs:
                 ssh-keyscan erdragh.dev >> /home/runner/.ssh/known_hosts
                 echo "${{secrets.DEPLOY_KEY}}" > /home/runner/.ssh/github_actions
                 chmod 600 /home/runner/.ssh/github_actions
-            - run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev uname -a
+            - name: Stop current deployment
+              run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "cd ~/web/erdragh.dev && podman-compose down && rm -r ./*"
+            - name: Deploy
+              env:
+                GLOBIGNORE: .next:node_modules
+              run: scp -r -i /home/runner/.ssh/github_actions ./ rocky@erdragh.dev:~/web/erdragh.dev/
