@@ -19,11 +19,9 @@ jobs:
                 echo "${{secrets.DEPLOY_KEY}}" > /home/runner/.ssh/github_actions
                 chmod 600 /home/runner/.ssh/github_actions
             - name: Stop current deployment
-              run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "cd ~/web/erdragh.dev && podman-compose down"
-            - name: Clean up current deployment
-              run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "cd ~/web/erdragh.dev && rm -rf ./* && podman image prune -af"
-            - name: Remove container
-              run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "podman rm next_app"
+              run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "cd ~/web/erdragh.dev && podman-compose down && rm -rf ./*"
+            - name: Clean deployment
+              run: ssh -i /home/runner/.ssh/github_actions rocky@erdragh.dev "podman rm next_app && podman image prune -af"
               continue-on-error: true
             - name: Deploy
               env:
