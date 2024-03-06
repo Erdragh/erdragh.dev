@@ -13,6 +13,7 @@ jobs:
             - run: bun install
             - run: bun run lint
             - run: bun run build
+            - run: dig erdragh.dev
             - name: Add SSH key
               env:
                 SSH_AUTH_SOCK: /tmp/ssh_agent.sock
