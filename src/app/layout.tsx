@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import "./global.scss";
 import ActiveLinks from "./active-links";
-import avatar from "../../public/avatar.svg";
+import avatar from "../assets/logos/avatar.svg";
+
+import github from "../assets/logos/github-mark-white.svg";
+import mail from "../assets/logos/mail-142.svg";
+import discord from "../assets/logos/discord-mark-white.svg";
 
 import styles from "./layout.module.scss";
 import Image from "next/image";
@@ -45,12 +49,15 @@ export default async function RootLayout({
                             <div className={styles.links}>
                                 <Link href="https://github.com/Erdragh" className="custom-link bubble">
                                     GitHub
+                                    <Image src={github} alt="GitHub Logo"/>
                                 </Link>
                                 <Link href="mailto:mail@erdragh.dev" className="custom-link bubble">
                                     E-Mail
+                                    <Image src={mail} alt="E-Mail Logo"/>
                                 </Link>
                                 <Link href="https://discord.com/users/365143419078705153" className="custom-link bubble">
                                     Discord
+                                    <Image src={discord} alt="Discord Logo"/>
                                 </Link>
                             </div>
                         </div>
