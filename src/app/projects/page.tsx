@@ -1,14 +1,16 @@
+import UnderConstruction from "@/components/under-construction";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "Erdragh - Projects",
-    description: "A little showcase of some of the projects I'm proud of."
-}
+    description: "A little showcase of some of the projects I'm proud of.",
+};
 
 export default async function Projects() {
     return (
         <>
-            Projects
+            <h2>Projects</h2>
+            <UnderConstruction />
         </>
     );
 }

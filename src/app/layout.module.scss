@@ -71,3 +71,10 @@
         filter: invert(100%);
     }
 }
+
+.active {
+    border-radius: 10px;
+    img {
+        border-radius: 10px;
+    }
+}

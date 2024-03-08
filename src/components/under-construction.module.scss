@@ -1,0 +1,13 @@
+.underConstruction {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 100px;
+        height: 100px;
+    }
+}

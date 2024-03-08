@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 export default async function Licensese() {
     return (
         <>
+            <h2>Licenses</h2>
             <ul>
                 <li>
                     Under construction symbol:
