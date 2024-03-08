@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import "./global.scss";
 import ActiveLinks from "./active-links";
+import avatar from "../../public/avatar.svg";
 
 import styles from "./layout.module.scss";
+import Image from "next/image";
 
 export const metadata: Metadata = {
     title: "Erdragh",
@@ -17,17 +19,21 @@ export default async function RootLayout({
     return (
         <html lang="en">
             <body>
-                <main className={styles.main}>{children}</main>
                 <nav className={styles.nav}>
                     <ActiveLinks
                         links={[
-                            ["/", "Home"],
+                            [
+                                "/",
+                                // eslint-disable-next-line react/jsx-key
+                                <Image priority={true} alt="Erdragh" src={avatar}></Image>,
+                            ],
                             ["/projects", "Projects"],
                             ["/about", "About Me"],
                         ]}
                         active={styles.active}
                     />
                 </nav>
+                <main className={styles.main}>{children}</main>
                 <footer>Hello</footer>
             </body>
         </html>

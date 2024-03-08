@@ -1,75 +1,47 @@
 .nav {
-    position: sticky;
     display: flex;
-    justify-content: center;
-    gap: 40px;
-    bottom: 0;
-    top: 0;
-    background-color: var(--background-color);
-    color: var(--background-color-contrast);
-    --border: 10px solid var(--background-color-highlight);
-    border-bottom: var(--border);
-    border-top: var(--border);
+    gap: 30px;
+    padding: 30px;
+    flex-wrap: wrap;
+    align-items: center;
 
     a {
+        background-color: var(--background-color-lighter);
+        border-radius: 25px;
+        transition-duration: 0.2s;
+        padding: 9px 10px 10px 9px;
         display: block;
-        position: relative;
-        padding: 10px 20px;
-        --link-background: var(--background-color-lighter);
-        background-color: var(--link-background);
+        color: var(--background-color-contrast);
         text-decoration: none;
-        color: inherit;
-        border-radius: 10px;
-        margin: 10px 0 10px 0;
-        transition-duration: .2s;
-
-        &::after, &::before {
-            content: "";
-            display: block;
-            background-color: var(--background-color);
-            width: 100%;
-            transition-duration: 0.2s;
-            height: 9px;
-            position: absolute;
-            left: 50%;
+        &:hover {
+            border-radius: 12.5px;
+            background-color: var(--background-color-highlight);
         }
-        &::before {
-            top: 100%;
-            border: 1px solid transparent;
-            border-bottom: none;
-            transform: translateX(-50%);
-        }
-        &::after {
-            bottom: 100%;
-            border: 1px solid transparent;
-            border-top: none;
-            transform: translateX(-50%);
-        }
-
-        &.active {
-            box-shadow: inset -20px 0 10px -10px var(--background-color-lighter), inset 20px 0 10px -10px var(--background-color-lighter)   ;
-            border-radius: 0;
-            &::after, &::before {
-                width: calc(100% + 20px);
-                background-color: var(--link-background);
-                border-color: var(--background-color-lighter);
-            }
-            &::before {
-                border-top-left-radius: 10px;
-                border-top-right-radius: 10px;
-            }
-            &::after { 
-                border-bottom-left-radius: 10px;
-                border-bottom-right-radius: 10px;
-            }
-        }
-
-        &:hover, &:focus-visible, &.active {
-            --link-background: var(--background-color-highlight);
-            outline: none;
-        }
+        border-top: 1px solid var(--background-color-highlight);
+        border-left: 1px solid var(--background-color-highlight);
+    }
+    img {
+        margin: -5px;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        transition-duration: 0.2s;
+        display: block;
+    }
+    a:hover img {
+        border-radius: 12.5px;
     }
 }
-.main {
-    flex: 1;
+
+@media (prefers-color-scheme: light) {
+    .nav img {
+        filter: invert(100%);
+    }
+    .nav a {
+        padding: 10px 9px 9px 10px;
+        border-top: none;
+        border-left: none;
+        border-right: 1px solid var(--background-color-highlight);
+        border-bottom: 1px solid var(--background-color-highlight);
+    }
 }
