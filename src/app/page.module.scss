@@ -1,0 +1,17 @@
+.factors {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    gap: 30px;
+    justify-content: center;
+
+    .factor {
+        min-width: 250px;
+        flex: 1;
+        max-width: 100%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}

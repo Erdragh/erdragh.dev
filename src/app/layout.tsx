@@ -19,22 +19,23 @@ export default async function RootLayout({
     return (
         <html lang="en">
             <body>
-                <nav className={styles.nav}>
+                <nav className={`content-width ${styles.nav}`}>
                     <ActiveLinks
                         links={[
                             [
                                 "/",
                                 // eslint-disable-next-line react/jsx-key
-                                <Image priority={true} alt="Erdragh" src={avatar}></Image>,
+                                <Image priority={true} alt="Homepage" src={avatar}></Image>,
                             ],
                             ["/projects", "Projects"],
                             ["/about", "About Me"],
                         ]}
                         active={styles.active}
+                        className={"bubble custom-link"}
                     />
                 </nav>
-                <main className={styles.main}>{children}</main>
-                <footer>Hello</footer>
+                <main className={`content-width ${styles.main}`}>{children}</main>
+                <footer className={`content-width`}>Hello</footer>
             </body>
         </html>
     );

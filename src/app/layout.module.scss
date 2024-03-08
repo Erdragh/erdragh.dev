@@ -1,24 +1,24 @@
 .nav {
     display: flex;
+    position: flex;
+    top: 0;
     gap: 30px;
     padding: 30px;
     flex-wrap: wrap;
     align-items: center;
 
     a {
-        background-color: var(--background-color-lighter);
-        border-radius: 25px;
-        transition-duration: 0.2s;
-        padding: 9px 10px 10px 9px;
+        color: inherit;
         display: block;
-        color: var(--background-color-contrast);
+        font-weight: bold;
+        margin: 0;
+        border-radius: 25px;
         text-decoration: none;
-        &:hover {
+        transition-duration: 0.2s;
+        &:hover, &:focus-visible {
             border-radius: 12.5px;
             background-color: var(--background-color-highlight);
         }
-        border-top: 1px solid var(--background-color-highlight);
-        border-left: 1px solid var(--background-color-highlight);
     }
     img {
         margin: -5px;
@@ -37,11 +37,8 @@
     .nav img {
         filter: invert(100%);
     }
-    .nav a {
-        padding: 10px 9px 9px 10px;
-        border-top: none;
-        border-left: none;
-        border-right: 1px solid var(--background-color-highlight);
-        border-bottom: 1px solid var(--background-color-highlight);
-    }
+}
+
+.main {
+    padding-inline: 30px;
 }
