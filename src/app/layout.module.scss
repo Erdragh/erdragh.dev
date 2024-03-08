@@ -6,20 +6,6 @@
     padding: 30px;
     flex-wrap: wrap;
     align-items: center;
-
-    a {
-        color: inherit;
-        display: block;
-        font-weight: bold;
-        margin: 0;
-        border-radius: 25px;
-        text-decoration: none;
-        transition-duration: 0.2s;
-        &:hover, &:focus-visible {
-            border-radius: 12.5px;
-            background-color: var(--background-color-highlight);
-        }
-    }
     img {
         margin: -5px;
         width: 50px;

@@ -64,6 +64,15 @@ body {
     border-top: 1px solid var(--background-color-highlight);
     border-left: 1px solid var(--background-color-highlight);
 }
+a.bubble {
+    text-decoration: none;
+    font-weight: bold;
+    transition-duration: .2s;
+    &:hover, &:focus-visible {
+        background-color: var(--background-color-highlight);
+        border-radius: 12.5px;
+    }
+}
 @media (prefers-color-scheme: light) {
     .bubble {
         padding: 10px 9px 9px 10px;
