@@ -42,3 +42,30 @@
 .main {
     padding-inline: 30px;
 }
+
+.footer {
+    padding: 30px;
+    gap: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .foot {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .contact {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+    }
+}
