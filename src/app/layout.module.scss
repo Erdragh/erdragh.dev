@@ -17,6 +17,13 @@
     a:hover img {
         border-radius: 12.5px;
     }
+
+    a.active {
+        border-radius: 10px;
+        img {
+            border-radius: 10px;
+        }
+    }
 }
 
 @media (prefers-color-scheme: light) {
@@ -69,12 +76,5 @@
 @media (prefers-color-scheme: light) {
     .footer .contact .links a img {
         filter: invert(100%);
-    }
-}
-
-.active {
-    border-radius: 10px;
-    img {
-        border-radius: 10px;
     }
 }
