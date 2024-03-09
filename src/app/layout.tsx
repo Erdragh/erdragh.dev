@@ -1,19 +1,22 @@
 import type { Metadata } from "next";
-import "./global.scss";
-import ActiveLinks from "./active-links";
 import avatar from "../assets/logos/avatar.svg";
+import ActiveLinks from "./active-links";
+import "./global.scss";
 
+import discord from "../assets/logos/discord-mark-white.svg";
 import github from "../assets/logos/github-mark-white.svg";
 import mail from "../assets/logos/mail-142.svg";
-import discord from "../assets/logos/discord-mark-white.svg";
 
-import styles from "./layout.module.scss";
 import Image from "next/image";
 import Link from "next/link";
+import styles from "./layout.module.scss";
 
 export const metadata: Metadata = {
     title: "Erdragh",
     description: "I'm a Computer Science student and web developer. I also make Minecraft mods.",
+    other: {
+        "darkreader-lock": "on"
+    }
 };
 
 export default async function RootLayout({
