@@ -46,7 +46,7 @@ export default async function RootLayout({
                 <main className={`content-width stretch-vertical ${styles.main}`}>{children}</main>
                 <footer className={`content-width ${styles.footer}`}>
                     <div className={styles.foot}>
-                        <h3 id="contact">Contact</h3>
+                        <h2 id="contact">Contact</h2>
                         <div className={styles.contact}>
                             You can find me via:
                             <div className={styles.links}>
@@ -66,7 +66,7 @@ export default async function RootLayout({
                         </div>
                     </div>
                     <div className={styles.foot}>
-                        <h3>This Website</h3>
+                        <h2>This Website</h2>
                         {commitHash ? <>Commit hash: {commitHash}</> : <>Environment: {process.env.NODE_ENV}</>}
                         <Link href="https://github.com/Erdragh/erdragh.dev">Source code on GitHub</Link>
                         <Link href="/licenses">Licenses</Link>

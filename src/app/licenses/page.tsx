@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default async function Licensese() {
     return (
         <>
-            <h2>Licenses</h2>
+            <h1>Licenses</h1>
             <ul>
                 <li>
                     Under construction symbol:

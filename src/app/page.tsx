@@ -5,12 +5,13 @@ export default async function Home() {
     return (
         <>
             <div>
+                <h1>Erdragh (<em>Jan Bayer</em>)</h1>
                 <p>Hello, I&apos;m Erdragh.</p>
                 <p>I develop things and stuff. I mostly focus on web development, but write Minecraft Mods too.</p>
             </div>
             <div className={styles.factors}>
                 <div className={`bubble ${styles.factor}`}>
-                    <h3>At Work</h3>
+                    <h2>At Work</h2>
                     <ul>
                         <li>
                             I&apos;ve used <Link href={"https://angular.io/"}>Angular</Link> for developing interactive web applications.
@@ -25,7 +26,7 @@ export default async function Home() {
                     </ul>
                 </div>
                 <div className={`bubble ${styles.factor}`}>
-                    <h3>At Home</h3>
+                    <h2>At Home</h2>
                     <ul>
                         <li>
                             <p>
@@ -43,7 +44,7 @@ export default async function Home() {
                     </ul>
                 </div>
                 <div className={`bubble ${styles.factor}`}>
-                    <h3>For You</h3>
+                    <h2>For You</h2>
                     <p>I am not currently looking for a job.</p>
                     <p>If you want to contact me anyway, see the <Link href="#contact">Contact</Link> information.</p>
                 </div>

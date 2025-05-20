@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default async function AboutMe() {
     return (
         <>
-            <h2>About Me</h2>
+            <h1>About Me</h1>
             <UnderConstruction />
         </>
     );
