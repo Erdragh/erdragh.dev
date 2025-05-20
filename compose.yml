@@ -5,8 +5,12 @@ services:
     container_name: erdragh_dev
     build:
       context: ./
+      args:
+        - COMMIT_HASH=${COMMIT_HASH}
       dockerfile: Containerfile
     image: dev.erdragh.website:${TAG}
+    environment:
+      - COMMIT_HASH=${COMMIT_HASH}
     restart: always
     ports:
       - 3000:3000
