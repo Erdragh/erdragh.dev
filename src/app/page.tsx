@@ -17,6 +17,9 @@ export default async function Home() {
                             I&apos;ve used <Link href={"https://angular.io/"}>Angular</Link> for developing interactive web applications.
                         </li>
                         <li>
+                            I&apos;ve written form-associated Web Components for easier cross-library forms.
+                        </li>
+                        <li>
                             I&apos;ve used <Link href={"https://react.dev/"}>React</Link> and <Link href={"https://nextjs.org/"}>NextJS</Link> for beautiful and
                             performant websites.
                         </li>
@@ -29,12 +32,7 @@ export default async function Home() {
                     <h2>At Home</h2>
                     <ul>
                         <li>
-                            <p>
-                                I was part of the development team for <Link href="https://wgg-neumarkt.de">my school&apos;s website</Link>.
-                            </p>
-                            <p>
-                                You can find its source code <Link href="https://github.com/Willibald-Gluck-Gymnasium/wgg-homepage">on GitHub</Link>.
-                            </p>
+                            I was part of the development team for <Link href="https://github.com/Willibald-Gluck-Gymnasium/wgg-homepage">my school&apos;s old website</Link>.
                         </li>
                         <li>
                             I love the <Link href="https://www.rust-lang.org/">Rust</Link> language and am trying out{" "}
