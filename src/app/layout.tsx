@@ -67,7 +67,7 @@ export default async function RootLayout({
                     </div>
                     <div className={styles.foot}>
                         <h2>This Website</h2>
-                        {commitHash ? <>Commit hash: {commitHash}</> : <>Environment: {process.env.NODE_ENV}</>}
+                        {commitHash ? <p>Commit hash: <Link href={`https://github.com/Erdragh/erdragh.dev/tree/${commitHash}`}>{commitHash.substring(0, 8)}</Link></p> : <p>Environment: {process.env.NODE_ENV}</p>}
                         <Link href="https://github.com/Erdragh/erdragh.dev">Source code on GitHub</Link>
                         <Link href="/licenses">Licenses</Link>
                     </div>
