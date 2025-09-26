@@ -10,6 +10,7 @@ import mail from "../assets/logos/mail-142.svg";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./layout.module.scss";
+import { NebulaBackground } from "@/components/NebulaBackground";
 
 export const metadata: Metadata = {
     title: "Erdragh",
@@ -28,6 +29,7 @@ export default async function RootLayout({
     return (
         <html lang="en">
             <body>
+                <NebulaBackground />
                 <nav className={`content-width ${styles.nav}`}>
                     <ActiveLinks
                         links={[

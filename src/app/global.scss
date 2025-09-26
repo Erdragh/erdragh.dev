@@ -13,24 +13,32 @@
 }
 
 :root {
-    --highlight-fg: #f66;
-    --highlight-bg: #400;
-    --background-color: #000;
+    --background-color-transparent: #1113;
+    --background-color: #111;
     --background-color-darker: #080808;
-    --background-color-lighter: #111;
-    --background-color-highlight: #222;
+    --background-color-lighter: #1115;
+    --background-color-highlight: #6665;
     --background-color-contrast: #fff;
+    --shadow-distance: 5px;
     scroll-behavior: smooth;
+}
+body {
+
+    --highlight-fg: hsl(calc((var(--hue-offset, 1) + 0.15) * 360) 100% 70% / 1);
+    --highlight-bg: hsl(calc((var(--hue-offset, 1) + 0.15) * 360) 50% 20% / 1);
 }
 @media (prefers-color-scheme: light) {
     :root {
-        --highlight-fg: rgb(184, 0, 0);
-        --highlight-bg: rgb(255, 111, 111);
+        --background-color-transparent: #fff6;
         --background-color: #fff;
         --background-color-darker: #ddd;
-        --background-color-lighter: #eee;
-        --background-color-highlight: #ccc;
+        --background-color-lighter: #eee9;
+        --background-color-highlight: #aaa5;
         --background-color-contrast: #000;
+    }
+    body {
+        --highlight-fg: hsl(calc((var(--hue-offset, 1) + 0.15) * 360) 80% 30% / 1);
+        --highlight-bg: hsl(calc((var(--hue-offset, 1) + 0.15) * 360) 50% 20% / 1);
     }
 }
 
@@ -57,12 +65,16 @@ body {
 // Bubble styling
 .bubble {
     display: block;
-    background-color: var(--background-color-lighter);
+    background-color: var(--background-color-transparent);
     border-radius: 25px;
-    padding: 9px 10px 10px 9px;
+    padding: 10px;
     color: var(--background-color-contrast);
-    border-top: 1px solid var(--background-color-highlight);
-    border-left: 1px solid var(--background-color-highlight);
+    backdrop-filter: blur(20px);
+    box-shadow: inset var(--shadow-distance) var(--shadow-distance) calc(2 * var(--shadow-distance)) var(--background-color), inset calc(-1 * var(--shadow-distance)) calc(-1 * var(--shadow-distance)) calc(2 * var(--shadow-distance)) var(--background-color-highlight);
+
+    @media (prefers-color-scheme: dark) {
+        box-shadow: inset var(--shadow-distance) var(--shadow-distance) calc(2 * var(--shadow-distance)) var(--background-color-highlight), inset calc(-1 * var(--shadow-distance)) calc(-1 * var(--shadow-distance)) calc(2 * var(--shadow-distance)) var(--background-color);
+    }
 }
 a.bubble {
     text-decoration: none;
@@ -71,15 +83,6 @@ a.bubble {
     &:hover, &:focus-visible {
         background-color: var(--background-color-highlight);
         border-radius: 12.5px;
-    }
-}
-@media (prefers-color-scheme: light) {
-    .bubble {
-        padding: 10px 9px 9px 10px;
-        border-top: none;
-        border-left: none;
-        border-right: 1px solid var(--background-color-highlight);
-        border-bottom: 1px solid var(--background-color-highlight);
     }
 }
 
@@ -116,6 +119,10 @@ ul, ol {
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    li::marker {
+        color: var(--highlight-fg);
+    }
 }
 
 a:not(.custom-link) {
@@ -136,6 +143,7 @@ a:not(.custom-link) {
         right: var(--outset);
         left: var(--outset);
         background-color: var(--highlight-fg);
+        box-shadow: inset 2px 2px 4px #fff6, inset -2px -2px 4px #0006;
         opacity: 0;
         border-radius: 0;
         transition-duration: .1s;
@@ -143,6 +151,7 @@ a:not(.custom-link) {
 
     &:hover, &:focus-visible {
         color: var(--background-color);
+        text-decoration: none;
         &::before {
             opacity: 1;
             --outset: -3px;
