@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
     title: "Erdragh - About Me",
@@ -9,15 +10,12 @@ export default async function AboutMe() {
     return (
         <>
             <h1>About Me</h1>
-            <p>I&apos;m a Computer Science student from Germany. I&apos;m almost done with my Bachelor&apos;s degree, which is about visualizing medical data in the browser.</p>
+            <p>I&apos;m a Computer Science student from Germany. I&apos;m almost done with my Bachelor&apos;s thesis, which is about visualizing medical data in the browser using a volume pathtracer in WebGL.</p>
+            <p>You can view a demo of the software online: <Link href={"https://volxel.github.io/Volxel"}>Volxel DICOM Viewer Demo</Link></p>
             <p>
                 I&apos;ve taken to web development as a profession and have been working as a web developer since before I went to university.
                 I love programming and have been doing it ever since I was 13 years old. Two specific topics have crystallized as subtopics I enjoy most.
                 One is web development, which should be apparent, and the other one is graphics programming.
-            </p>
-            <p>
-                Because I also like gaming (flatscreen and VR) I&apos;ve combined my passion for programming with it and have been getting into modding for various games.
-                Most prominently Minecraft, where I enjoy making mods and modpacks (which have netted me &gt; 1 million downloads in total).
             </p>
         </>
     );
