@@ -42,7 +42,7 @@
   --movement: 50px;
   border-radius: 50%;
   // bit of boolean logic using round() to skip over green in the color spectrum
-  background: hsl(calc((var(--hue, 1) * 0.3 + var(--hue-offset, 0)) * 360) 50% 50% / 0.1);
+  background: hsl(calc((var(--hue, 1) * 0.3 - 0.15 + var(--hue-offset, 0)) * 360) 50% 50% / 0.1);
   transition: .5s;
   top: calc(var(--y) * 200% - 50%);
   left: calc(var(--x) * 200% - 50%);

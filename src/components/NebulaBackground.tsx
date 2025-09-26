@@ -36,7 +36,7 @@ function sfc32(a: number, b: number, c: number, d: number) {
 
 const movementAnimationDuration = 60 * 1000;
 
-export function NebulaBackground({nebulaComplexity = 15, seed: initialSeed = "fourty two"}: Readonly<{nebulaComplexity?: number, seed?: string}>) {
+export function NebulaBackground({nebulaComplexity = 15, seed: initialSeed = "red"}: Readonly<{nebulaComplexity?: number, seed?: string}>) {
     const path = usePathname();
 
     const seed = cyrb128(path + nebulaComplexity + initialSeed);
