@@ -7,7 +7,7 @@ export default async function Home() {
             <div>
                 <h1>Erdragh (<em>Jan Bayer</em>)</h1>
                 <p>Hello, I&apos;m Erdragh.</p>
-                <p>I've been programming for as long as I can reasonably remember. Among other things I do web development, game development and Minecraft mod development.</p>
+                <p>I&apos;ve been programming for as long as I can reasonably remember. Among other things I do web development, game development and Minecraft mod development.</p>
         
             </div>
             <div className={styles.factors}>
@@ -15,7 +15,7 @@ export default async function Home() {
                     <h2>At Work</h2>
                     <ul>
                         <li>
-                            I&apos;ve used <Link href={"https://angular.io/"}>Angular</Link> for developing interactive web applications, even though it doesn't feel nice to use it.
+                            I&apos;ve used <Link href={"https://angular.io/"}>Angular</Link> for developing interactive web applications, even though it doesn&apos;t feel nice to use it.
                         </li>
                         <li>
                             I&apos;ve written form-associated Web Components for easier cross-library forms.
@@ -33,7 +33,7 @@ export default async function Home() {
                     <h2>At Home</h2>
                     <ul>
                         <li>
-                            I dabble with game and engine development. Recently I have taken to using <Link href="https://ziglang.org">Zig</Link> with <Link href="https://wiki.libsdl.org/SDL3/CategoryGPU">SDL3's GPU API</Link>.
+                            I dabble with game and engine development. Recently I have taken to using <Link href="https://ziglang.org">Zig</Link> with <Link href="https://wiki.libsdl.org/SDL3/CategoryGPU">SDL3&apos;s GPU API</Link>.
                         </li>
                         <li>
                             I have started multiple Rust GUI app projects, many of which are waiting for my attention again.
