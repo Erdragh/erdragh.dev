@@ -7,14 +7,15 @@ export default async function Home() {
             <div>
                 <h1>Erdragh (<em>Jan Bayer</em>)</h1>
                 <p>Hello, I&apos;m Erdragh.</p>
-                <p>I develop things and stuff. I mostly focus on web development, but write Minecraft Mods too.</p>
+                <p>I've been programming for as long as I can reasonably remember. Among other things I do web development, game development and Minecraft mod development.</p>
+        
             </div>
             <div className={styles.factors}>
                 <div className={`bubble ${styles.factor}`}>
                     <h2>At Work</h2>
                     <ul>
                         <li>
-                            I&apos;ve used <Link href={"https://angular.io/"}>Angular</Link> for developing interactive web applications.
+                            I&apos;ve used <Link href={"https://angular.io/"}>Angular</Link> for developing interactive web applications, even though it doesn't feel nice to use it.
                         </li>
                         <li>
                             I&apos;ve written form-associated Web Components for easier cross-library forms.
@@ -32,11 +33,10 @@ export default async function Home() {
                     <h2>At Home</h2>
                     <ul>
                         <li>
-                            I was part of the development team for <Link href="https://github.com/Willibald-Gluck-Gymnasium/wgg-homepage">my school&apos;s old website</Link>.
+                            I dabble with game and engine development. Recently I have taken to using <Link href="https://ziglang.org">Zig</Link> with <Link href="https://wiki.libsdl.org/SDL3/CategoryGPU">SDL3's GPU API</Link>.
                         </li>
                         <li>
-                            I love the <Link href="https://www.rust-lang.org/">Rust</Link> language and am trying out{" "}
-                            <Link href="https://bevyengine.org/">Bevy</Link>.
+                            I have started multiple Rust GUI app projects, many of which are waiting for my attention again.
                         </li>
                         <li>I write Minecraft mods, available on <Link href="https://modrinth.com/user/Erdragh">Modrinth</Link>.</li>
                     </ul>
