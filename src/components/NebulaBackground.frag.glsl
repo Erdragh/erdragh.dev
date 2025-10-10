@@ -497,7 +497,7 @@ void main() {
 
     vec3 xyz = vec3(p, 0);
 
-    float n = color(xyz.xy * 1.0 + vec2(hueOffset * 3.0));
+    float n = color(xyz.xy * 1.0 + vec2(hueOffset * 3.0 - 1.5) + vec2(hueOffset * 4.0, 0));
     float b = color(xyz.xy * 1.1);
     float corner = clamp(length(p) * range + n * 0.25, 0.0, range);
     n = mix(0.5 * n + 0.5, 1.0, corner * 0.7);
