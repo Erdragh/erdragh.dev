@@ -41,10 +41,62 @@ export function createProgram(gl: WebGL2RenderingContext, vertex: WebGLShader, f
     }
 }
 
-export function NebulaBackground({ nebulaComplexity = 15, seed: initialSeed = "red" }: Readonly<{ nebulaComplexity?: number, seed?: string }>) {
+function cyrb128(str: string): [number, number, number, number] {
+    let h1 = 1779033703, h2 = 3144134277,
+        h3 = 1013904242, h4 = 2773480762;
+    for (let i = 0, k; i < str.length; i++) {
+        k = str.charCodeAt(i);
+        h1 = h2 ^ Math.imul(h1 ^ k, 597399067);
+        h2 = h3 ^ Math.imul(h2 ^ k, 2869860233);
+        h3 = h4 ^ Math.imul(h3 ^ k, 951274213);
+        h4 = h1 ^ Math.imul(h4 ^ k, 2716044179);
+    }
+    h1 = Math.imul(h3 ^ (h1 >>> 18), 597399067);
+    h2 = Math.imul(h4 ^ (h2 >>> 22), 2869860233);
+    h3 = Math.imul(h1 ^ (h3 >>> 17), 951274213);
+    h4 = Math.imul(h2 ^ (h4 >>> 19), 2716044179);
+    h1 ^= (h2 ^ h3 ^ h4), h2 ^= h1, h3 ^= h1, h4 ^= h1;
+    return [h1>>>0, h2>>>0, h3>>>0, h4>>>0];
+}
+function sfc32(a: number, b: number, c: number, d: number) {
+    return function() {
+        a |= 0; b |= 0; c |= 0; d |= 0;
+        const t = (a + b | 0) + d | 0;
+        d = d + 1 | 0;
+        a = b ^ b >>> 9;
+        b = c + (c << 3) | 0;
+        c = (c << 21 | c >>> 11);
+        c = c + t | 0;
+        return (t >>> 0) / 4294967296;
+    }
+}
+
+export function NebulaBackground({ seed: initialSeed = "webgl2" }: Readonly<{ seed?: string }>) {
     const path = usePathname();
 
+    const seed = cyrb128(path + initialSeed);
+    const rand = sfc32(...seed);
+
+    const hueOffsetBase = rand();
+    
     const canvas = useRef<HTMLCanvasElement>(null);
+    const hueOffset = useRef<{
+        current: number,
+        target: number,
+        startedAt: DOMHighResTimeStamp | null
+    }>({
+        current: hueOffsetBase,
+        target: hueOffsetBase,
+        startedAt: null
+    });
+
+    useEffect(() => {
+        // update whole page hue offset
+        document.body.style.setProperty("--hue-offset", hueOffsetBase + "");
+        // update rendering hue offset
+        hueOffset.current.target = hueOffsetBase;
+        hueOffset.current.startedAt = null;
+    }, [hueOffsetBase])
 
     useEffect(() => {
         if (!canvas.current) return;
@@ -82,9 +134,23 @@ export function NebulaBackground({ nebulaComplexity = 15, seed: initialSeed = "r
         gl.vertexAttribPointer(positionAttribute, 2, gl.FLOAT, false, 0, 0);
         gl.useProgram(program);
 
-        const render = () => {
-            gl.uniform1f(gl.getUniformLocation(program, "time"), performance.now());
-            gl.uniform1f(gl.getUniformLocation(program, "hueOffset"), 0);
+        // enable blending
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+        gl.clearColor(0,0,0,0);
+
+        const render = (timestamp: DOMHighResTimeStamp) => {
+            if (hueOffset.current.target !== hueOffset.current.current) {
+                if (hueOffset.current.startedAt === null) hueOffset.current.startedAt = timestamp;
+                // interpolate hue offset to new one
+                // TODO: correct color interpolation
+                const timeSince = timestamp - hueOffset.current.startedAt;
+                const progress = Math.min(timeSince / 1000, 1.0);
+                hueOffset.current.current = progress * hueOffset.current.target + (1 - progress) * hueOffset.current.current;
+            }
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            gl.uniform1f(gl.getUniformLocation(program, "time"), timestamp / 1000);
+            gl.uniform1f(gl.getUniformLocation(program, "hueOffset"), hueOffset.current.current);
             gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
             if (running) requestAnimationFrame(render);
@@ -95,7 +161,7 @@ export function NebulaBackground({ nebulaComplexity = 15, seed: initialSeed = "r
             running = false
             observer.disconnect();
         }
-    }, [canvas])
+    }, [canvas, hueOffset])
 
     return <>
         <canvas className={styles.background} ref={canvas}>
