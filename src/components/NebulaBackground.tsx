@@ -112,8 +112,6 @@ export function NebulaBackground({ seed: initialSeed = "webgl2" }: Readonly<{ se
             canvas.current.height = rect.height;
             gl.viewport(0, 0, rect.width, rect.height);
         }
-        const observer = new ResizeObserver(() => resize())
-        observer.observe(canvas.current);
 
         // setup shaders and stuff
         const vertex = createShader(gl, gl.VERTEX_SHADER, vertexShader);
@@ -140,6 +138,7 @@ export function NebulaBackground({ seed: initialSeed = "webgl2" }: Readonly<{ se
         gl.clearColor(0,0,0,0);
 
         const render = (timestamp: DOMHighResTimeStamp) => {
+            resize();
             if (hueOffset.current.target !== hueOffset.current.current) {
                 if (hueOffset.current.startedAt === null) hueOffset.current.startedAt = timestamp;
                 // interpolate hue offset to new one
@@ -159,7 +158,6 @@ export function NebulaBackground({ seed: initialSeed = "webgl2" }: Readonly<{ se
 
         return () => {
             running = false
-            observer.disconnect();
         }
     }, [canvas, hueOffset])
 
