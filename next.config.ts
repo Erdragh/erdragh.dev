@@ -17,6 +17,16 @@ const nextConfig: NextConfig = {
             }
         }
         return config;
+    },
+    turbopack: {
+        rules: {
+            "*.glsl": {
+                loaders: [{
+                    loader: "raw-loader"
+                }],
+                    as: "*.js"
+            }
+        }
     }
 };
 
