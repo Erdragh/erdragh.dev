@@ -9,7 +9,7 @@ jobs:
         runs-on: ubuntu-latest
         environment: prod
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v7
             - name: Add SSH key
               env:
                 SSH_AUTH_SOCK: /tmp/ssh_agent.sock
